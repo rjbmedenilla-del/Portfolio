@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)file:///C:/Users/rjbme/Downloads/RJ%20Web%202.html/RJ%20Web%202.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ramon B Mendenilla Jr — Portfolio Piece</title>
+  <style>
+    :root{--bg:#0b0b0c;--panel:#111114;--ink:#eaeaea;--muted:#b8bec6;--accent:#ff6a3d;--ring:#2e333b}
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif}
+    a{color:var(--ink)}
+    .wrap{max-width:1180px;margin:0 auto;padding:24px}
+    .top{position:sticky;top:0;background:linear-gradient(180deg,rgba(11,11,12,.9),rgba(11,11,12,.6));backdrop-filter:blur(8px);z-index:50;border-bottom:1px solid var(--ring)}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+    .logo{display:flex;gap:12px;align-items:center}
+    .badge{width:38px;height:38px;border-radius:14px;background:linear-gradient(135deg,#ff8a3d,#ff3d77);display:grid;place-items:center;font-weight:800}
+    .btn{border:1px solid var(--ring);background:#141418;color:var(--ink);padding:8px 12px;border-radius:12px;font-size:14px;cursor:pointer}
+    .btn:hover{background:#191a1f}
+    .btn.primary{background:var(--ink);color:#0c0c0f}
+    .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;padding:36px 24px}
+    @media(max-width:900px){.hero{grid-template-columns:1fr}}
+    .card{background:var(--panel);border:1px solid var(--ring);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .title{font-size:40px;line-height:1.05;margin:0}
+    .muted{color:var(--muted)}
+
+    /* rows (All view) */
+    .rowwrap{margin-top:20px}
+    .section-title{display:flex;gap:8px;align-items:center;font-weight:800;margin:0 6px 10px 6px}
+    .hscroll{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,1fr);gap:14px;overflow-x:auto;padding:8px 6px 12px 6px;scroll-snap-type:x mandatory}
+    .hscroll::-webkit-scrollbar{height:8px}
+    .hscroll::-webkit-scrollbar-thumb{background:#2a2d35;border-radius:8px}
+
+    /* grid (Single category view) */
+    .grid{display:grid;grid-template-columns:repeat(4,minmax(220px,1fr));gap:14px;margin-top:16px}
+    @media(max-width:1200px){.grid{grid-template-columns:repeat(3,minmax(220px,1fr))}}
+    @media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(200px,1fr))}}
+    @media(max-width:520px){.grid{grid-template-columns:1fr}}
+
+    .tile{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--ring);scroll-snap-align:start}
+    .tile img{width:100%;height:170px;object-fit:cover;display:block}
+    .cap{position:absolute;left:0;right:0;bottom:0;padding:8px 10px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.65));font-size:12px}
+    .trash{position:absolute;right:8px;top:8px;background:rgba(0,0,0,.6);border:1px solid var(--ring);color:var(--ink);border-radius:10px;padding:4px 8px;font-size:12px;cursor:pointer;display:none}
+    .tile:hover .trash{display:inline-block}
+
+    /* bottom controls */
+    .controls{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:26px 6px 8px}
+    .controls .search{flex:1;border:1px solid #3a3f49;background:#15161b;color:#e7e9ee;padding:10px 12px;border-radius:12px}
+    .pillbar{display:flex;gap:8px;flex-wrap:wrap}
+    .pill{border:1px solid #3a3f49;padding:7px 12px;border-radius:999px;font-size:13px;background:#16171d;color:#dfe3ea}
+    .pill.active{background:#2a2d35;color:#fff;border-color:#3a3f49;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+
+    /* overlays */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:100;padding:24px}
+    .overlay .inner{position:relative;max-width:1000px;width:100%}
+    .overlay .media{background:#000;border-radius:16px;border:1px solid var(--ring);overflow:hidden}
+    .overlay img{max-width:95vw;max-height:78vh;display:block;margin:0 auto}
+    .overlay iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+    .bar{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+    .lb-btn{border:1px solid var(--ring);background:#141418;color:var(--ink);padding:8px 12px;border-radius:10px;cursor:pointer}
+    .side{position:absolute;top:0;bottom:0;width:74px;display:grid;place-items:center;cursor:pointer;opacity:.95;border:none}
+    .side span{font-size:34px;line-height:1;color:white;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+    .side.left{left:0;background:linear-gradient(90deg,rgba(0,0,0,.45),transparent)}
+    .side.right{right:0;background:linear-gradient(-90deg,rgba(0,0,0,.45),transparent)}
+
+    .settings{position:fixed;right:18px;bottom:18px;width:min(560px,92vw);background:#101014;border:1px solid var(--ring);border-radius:18px;display:none;z-index:60}
+    .settings .hd{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--ring);padding:12px 14px}
+    .settings .bd{padding:14px;display:grid;gap:12px}
+    .tabs{display:flex;gap:8px;margin-bottom:8px}
+    .tab{border:1px solid var(--ring);background:#141418;color:#eaeaea;padding:6px 10px;border-radius:10px;cursor:pointer;font-size:13px}
+    .tab.active{background:#1e2026}
+    .hint{font-size:12px;color:var(--muted)}
+
+    footer{border-top:1px solid var(--ring);margin-top:30px}
+    .link{color:var(--ink);text-decoration:none}
+    .link:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="topbar">
+      <div class="logo">
+        <div class="badge">RJ</div>
+        <div>
+          <div style="font-weight:700">Ramon (RJ) Mendenilla</div>
+          <div class="muted" style="font-size:12px">Animation • Storyboards • Character Design</div>
+        </div>
+      </div>
+      <div class="row">
+        <button id="designBtn" class="btn">Design</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <h1 class="title">My Portfolio</h1>
+        <p class="muted">I’m <b>RJ</b> — an animation‑focused artist creating character‑driven visuals, storyboards with cinematic flow, and expressive 2D animation.</p>
+        <div class="row" style="margin-top:14px">
+          <button id="contactBtn" class="btn primary">Contact</button>
+          <a class="btn" href="file:///C:/Users/rjbme/Downloads/RJ%20Web%202.html/resume.pdf">Resume</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="./Ramon B Mendenilla Jr — Portfolio Piece_files/photo-1500530855697-b586d89ba3ee" alt="hero" style="width:100%;height:320px;object-fit:cover">
+      </div>
+    </section>
+
+    <!-- Dynamic content -->
+    <div id="rows" style="display: none;"></div>
+    <div id="grid" class="grid" style="display: grid;"><div class="tile"><button data-open-reel="0" style="all:unset;cursor:pointer;display:block;width:100%"><img src="./Ramon B Mendenilla Jr — Portfolio Piece_files/hqdefault.jpg" alt="Animation Reel 1"><div class="cap"><div style="font-weight:700;font-size:13px">Animation Reel 1</div><div class="muted">Reel</div></div></button></div><div class="tile"><button data-open-reel="1" style="all:unset;cursor:pointer;display:block;width:100%"><img src="./Ramon B Mendenilla Jr — Portfolio Piece_files/hqdefault(1).jpg" alt="Animation Reel 2"><div class="cap"><div style="font-weight:700;font-size:13px">Animation Reel 2</div><div class="muted">Reel</div></div></button></div><div class="tile"><button data-open-reel="2" style="all:unset;cursor:pointer;display:block;width:100%"><img src="./Ramon B Mendenilla Jr — Portfolio Piece_files/hqdefault(2).jpg" alt="Animation Reel 3"><div class="cap"><div style="font-weight:700;font-size:13px">Animation Reel 3</div><div class="muted">Reel</div></div></button></div></div>
+
+    <!-- Bottom controls (pills + search + quick add only in design) -->
+    <section id="controls" class="controls">
+      <div class="pillbar" id="catRow"><button class="pill " data-cat="All">All</button><button class="pill active" data-cat="Reels">Reels</button><button class="pill " data-cat="2D Animation">2D Animation</button><button class="pill " data-cat="Character Design">Character Design</button><button class="pill " data-cat="Storyboards">Storyboards</button><button class="pill " data-cat="Concept Art">Concept Art</button><button class="pill " data-cat="Illustration">Illustration</button></div>
+      <input id="search" class="search" placeholder="Search title or notes…">
+    </section>
+
+    <section id="quickBar" class="controls" style="display:none">
+      <div class="muted" id="quickLabel">Design mode: add to <b id="qCat1">Reels</b></div>
+      <div class="row" style="gap:8px">
+        <button id="quickAddImage" class="btn">+ Add Image</button>
+        <button id="quickAddReel" class="btn">+ Add Reel</button>
+      </div>
+    </section>
+
+    <footer class="wrap" style="padding-left:0;padding-right:0">
+      <div style="display:grid;gap:6px">
+        <div class="muted">© <span id="year">2025</span> Ramon (RJ) Mendenilla · Build <b>1.7</b></div>
+        <div class="muted">
+          La Mirada, CA · Ramon B. Mendenilla Jr. · <a class="link" href="tel:+15622044726">(562) 204-4726</a>
+          · <a class="link" href="mailto:ramonbmedenillajr@gmail.com">ramonbmedenillajr@gmail.com</a>
+          · <a class="link" href="https://linkedin.com/in/ramonmedenilla" target="_blank">linkedin.com/in/ramonmedenilla</a>
+        </div>
+        <div class="muted">
+          Portfolio: <a class="link" href="https://artstation.com/ramonmedenilla" target="_blank">artstation.com/ramonmedenilla</a>
+          · Reel: <a class="link" href="https://vimeo.com/yourreel" target="_blank">vimeo.com/yourreel</a> (pw: ramon2025)
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Image Lightbox -->
+  <div id="lightbox" class="overlay" role="dialog" aria-modal="">
+    <div class="inner">
+      <div class="media" style="position:relative">
+        <button class="side left" id="lbLeft" aria-label="Previous image"><span>‹</span></button>
+        <img id="lbImg" alt="">
+        <button class="side right" id="lbRight" aria-label="Next image"><span>›</span></button>
+      </div>
+      <div class="bar">
+        <div id="lbMeta" class="muted" style="font-size:12px"></div>
+        <div class="row">
+          <button id="lbClose" class="lb-btn">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Modal -->
+  <div id="videoBox" class="overlay" role="dialog" aria-modal="">
+    <div class="inner">
+      <div class="media" style="position:relative">
+        <button class="side left" id="vbLeft" aria-label="Previous video"><span>‹</span></button>
+        <iframe id="vbFrame" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" title="Animation Reel" src="./Ramon B Mendenilla Jr — Portfolio Piece_files/saved_resource.html"></iframe>
+        <button class="side right" id="vbRight" aria-label="Next video"><span>›</span></button>
+      </div>
+      <div class="bar">
+        <div id="vbMeta" class="muted" style="font-size:12px"></div>
+        <div class="row">
+          <button id="vbClose" class="lb-btn">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Modal (works even without email app) -->
+  <div id="contactBox" class="overlay" role="dialog" aria-modal="">
+    <div class="inner" style="max-width:620px">
+      <div class="card" style="padding:18px">
+        <h3 style="margin:0 0 6px 0">Contact RJ</h3>
+        <div class="muted">La Mirada, CA</div>
+        <div style="display:grid;gap:8px;margin-top:12px">
+          <div>
+            <a class="link" href="tel:+15622044726">(562) 204-4726</a>
+            <button id="copyPhone" class="lb-btn" style="margin-left:8px">Copy</button>
+          </div>
+          <div>
+            <a class="link" href="mailto:ramonbmedenillajr@gmail.com">ramonbmedenillajr@gmail.com</a>
+            <button id="copyEmail" class="lb-btn" style="margin-left:8px">Copy</button>
+          </div>
+          <div>
+            <a class="link" target="_blank" href="https://linkedin.com/in/ramonmedenilla">linkedin.com/in/ramonmedenilla</a>
+          </div>
+          <div class="muted">
+            Portfolio: <a class="link" target="_blank" href="https://artstation.com/ramonmedenilla">artstation.com/ramonmedenilla</a>
+            · Reel: <a class="link" target="_blank" href="https://vimeo.com/yourreel">vimeo.com/yourreel</a> (pw: ramon2025)
+          </div>
+        </div>
+        <div class="row" style="justify-content:flex-end;margin-top:12px"><button id="contactClose" class="lb-btn">Close</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings (Design mode) -->
+  <div id="settings" class="settings" style="display: none;">
+    <div class="hd">
+      <div style="font-weight:700">Quick Add</div>
+      <button id="doneBtn" class="btn">Done</button>
+    </div>
+    <div class="bd">
+      <div class="tabs">
+        <button id="tabImages" class="tab active">Images</button>
+        <button id="tabReels" class="tab">Reels</button>
+      </div>
+
+      <!-- Images form -->
+      <div id="panelImages">
+        <label class="hint">Title</label>
+        <input id="newTitle" placeholder="e.g., Character Pose Sheet">
+        <label class="hint">Category</label>
+        <select id="newCat"><option value="2D Animation">2D Animation</option><option value="Character Design">Character Design</option><option value="Storyboards">Storyboards</option><option value="Concept Art">Concept Art</option><option value="Illustration">Illustration</option></select>
+        <label class="hint">Add by URL</label>
+        <div class="row">
+          <input id="newURL" placeholder="https://…/your-image.jpg" style="flex:1">
+          <button id="addURL" class="btn primary">Add</button>
+        </div>
+        <label class="hint">Or upload files</label>
+        <input id="fileInput" type="file" accept="image/*" multiple="">
+      </div>
+
+      <!-- Reels form -->
+      <div id="panelReels" style="display:none">
+        <label class="hint">Reel title</label>
+        <input id="reelTitle" placeholder="e.g., 2024 Character Animation Reel">
+        <label class="hint">YouTube or Vimeo URL</label>
+        <input id="reelURL" placeholder="https://www.youtube.com/watch?v=... or https://vimeo.com/123456">
+        <label class="hint">(Optional) Custom thumbnail URL</label>
+        <input id="reelThumb" placeholder="https://…/thumb.jpg">
+        <div class="row">
+          <button id="addReel" class="btn primary">Add Reel</button>
+        </div>
+      </div>
+
+      <div class="hint">Tip: This saves to <b>this browser only</b>. For a permanent site, host the images and reels on the web and add by URL.</div>
+    </div>
+  </div>
+
+  <script>
+  // --- Config
+  const STORAGE_IMG = 'rj_images';
+  const STORAGE_REELS = 'rj_reels';
+  const DESIGN_PASSWORD = 'Rjrj';
+  const CATEGORIES = ['All','Reels','2D Animation','Character Design','Storyboards','Concept Art','Illustration'];
+  const CONTENT_CATS = ['Reels','2D Animation','Character Design','Storyboards','Concept Art','Illustration'];
+
+  // --- Seed content (multiple per category)
+  const SEED_IMAGES = [
+    // Character Design
+    {id:'cd-1',type:'image',src:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop',title:'Character Turnaround — The Runner',category:'Character Design'},
+    {id:'cd-2',type:'image',src:'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=1200&auto=format&fit=crop',title:'Gesture Sheet — Acrobat',category:'Character Design'},
+    {id:'cd-3',type:'image',src:'https://images.unsplash.com/photo-1520975922284-c0d61ecf5182?q=80&w=1200&auto=format&fit=crop',title:'Expression Set — Hero',category:'Character Design'},
+    // Storyboards
+    {id:'sb-1',type:'image',src:'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1200&auto=format&fit=crop',title:'Storyboard: Alley Chase (Panel 03)',category:'Storyboards'},
+    {id:'sb-2',type:'image',src:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop',title:'Storyboard: Café Beat (Panel 07)',category:'Storyboards'},
+    {id:'sb-3',type:'image',src:'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?q=80&w=1200&auto=format&fit=crop',title:'Storyboard: Exit Ramp (Panel 12)',category:'Storyboards'},
+    // 2D Animation frames
+    {id:'an-1',type:'image',src:'https://images.unsplash.com/photo-1517816428104-797678c7cf0d?q=80&w=1200&auto=format&fit=crop',title:'2D Animation Frame — Splash FX',category:'2D Animation'},
+    {id:'an-2',type:'image',src:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop',title:'Timing Keys — Jump',category:'2D Animation'},
+    {id:'an-3',type:'image',src:'https://images.unsplash.com/photo-1495567720989-cebdbdd97913?q=80&w=1200&auto=format&fit=crop',title:'Breakdown — Run Cycle',category:'2D Animation'},
+    // Concept Art
+    {id:'ca-1',type:'image',src:'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?q=80&w=1200&auto=format&fit=crop',title:'Concept Art — Dawn City',category:'Concept Art'},
+    {id:'ca-2',type:'image',src:'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop',title:'Concept Art — Canyon Vista',category:'Concept Art'},
+    {id:'ca-3',type:'image',src:'https://images.unsplash.com/photo-1500534314210-9ead85f4d4e9?q=80&w=1200&auto=format&fit=crop',title:'Concept Art — Night Harbor',category:'Concept Art'},
+    // Illustration
+    {id:'il-1',type:'image',src:'https://images.unsplash.com/photo-1519689099080-2fce0f0a3f3b?q=80&w=1200&auto=format&fit=crop',title:'Illustration — Moonlight',category:'Illustration'},
+    {id:'il-2',type:'image',src:'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop',title:'Illustration — Alley Poster',category:'Illustration'}
+  ];
+
+  function parseVideo(url){
+    try{ const u = new URL(url);
+      if(u.hostname.includes('youtube.com')) return {platform:'youtube', id: u.searchParams.get('v')||''};
+      if(u.hostname==='youtu.be') return {platform:'youtube', id: u.pathname.slice(1)};
+      if(u.hostname.includes('vimeo.com')) return {platform:'vimeo', id: u.pathname.split('/').filter(Boolean)[0]||''};
+      return {platform:'unknown', id:''};
+    }catch{ return {platform:'unknown', id:''}; }
+  }
+  function embedURL(p,id){ if(p==='youtube') return `https://www.youtube.com/embed/${id}`; if(p==='vimeo') return `https://player.vimeo.com/video/${id}`; return ''; }
+  function thumbURL(p,id,custom){ if(custom) return custom; if(p==='youtube'&&id) return `https://img.youtube.com/vi/${id}/hqdefault.jpg`; return 'https://images.unsplash.com/photo-1518112166137-85f9979a43a0?q=80&w=1200&auto=format&fit=crop'; }
+  function vid(title,url,thumb=''){ const {platform,id}=parseVideo(url); return {id:'reel-'+Math.random().toString(36).slice(2,7), type:'reel', title, url, platform, vid:id, thumb: thumbURL(platform,id,thumb), category:'Reels'}; }
+
+  const SEED_REELS = [
+    vid('Animation Reel 1','https://www.youtube.com/watch?v=_yAHsbanSk4'),
+    vid('Animation Reel 2','https://www.youtube.com/watch?v=vLtSBmAyRWY'),
+    vid('Animation Reel 3','https://www.youtube.com/watch?v=AQgMrIf0lMk')
+  ];
+
+  // --- Elements
+  const els = {
+    year: document.getElementById('year'),
+    rows: document.getElementById('rows'),
+    grid: document.getElementById('grid'),
+    catRow: document.getElementById('catRow'),
+    search: document.getElementById('search'),
+    quickBar: document.getElementById('quickBar'),
+    quickLabel: document.getElementById('quickLabel'),
+    qCat1: document.getElementById('qCat1'),
+    quickAddImage: document.getElementById('quickAddImage'),
+    quickAddReel: document.getElementById('quickAddReel'),
+    lightbox: document.getElementById('lightbox'),
+    lbImg: document.getElementById('lbImg'),
+    lbMeta: document.getElementById('lbMeta'),
+    lbLeft: document.getElementById('lbLeft'),
+    lbRight: document.getElementById('lbRight'),
+    lbClose: document.getElementById('lbClose'),
+    videoBox: document.getElementById('videoBox'),
+    vbFrame: document.getElementById('vbFrame'),
+    vbMeta: document.getElementById('vbMeta'),
+    vbLeft: document.getElementById('vbLeft'),
+    vbRight: document.getElementById('vbRight'),
+    vbClose: document.getElementById('vbClose'),
+    designBtn: document.getElementById('designBtn'),
+    settings: document.getElementById('settings'),
+    doneBtn: document.getElementById('doneBtn'),
+    tabImages: document.getElementById('tabImages'),
+    tabReels: document.getElementById('tabReels'),
+    panelImages: document.getElementById('panelImages'),
+    panelReels: document.getElementById('panelReels'),
+    newTitle: document.getElementById('newTitle'),
+    newCat: document.getElementById('newCat'),
+    newURL: document.getElementById('newURL'),
+    addURL: document.getElementById('addURL'),
+    fileInput: document.getElementById('fileInput'),
+    reelTitle: document.getElementById('reelTitle'),
+    reelURL: document.getElementById('reelURL'),
+    reelThumb: document.getElementById('reelThumb'),
+    addReel: document.getElementById('addReel'),
+    // contact
+    contactBtn: document.getElementById('contactBtn'),
+    contactBox: document.getElementById('contactBox'),
+    contactClose: document.getElementById('contactClose'),
+    copyEmail: document.getElementById('copyEmail'),
+    copyPhone: document.getElementById('copyPhone')
+  };
+
+  // --- State (start on Reels, NOT in design mode)
+  let state = {
+    images: [],
+    reels: [],
+    category: 'Reels',
+    query: '',
+    designUnlocked: false
+  };
+  let imgList = []; let imgIndex = 0; // for image overlay
+  let vidList = []; let vidIndex = 0; // for reel overlay
+
+  function ensureBaseline(){
+    const bySrc = new Set(state.images.map(i=>i.src));
+    for(const s of SEED_IMAGES){ if(!bySrc.has(s.src)) state.images.push(s); }
+    const haveVids = new Set(state.reels.map(r=>r.vid));
+    for(const r of SEED_REELS){ if(!haveVids.has(r.vid)) state.reels.push(r); }
+  }
+
+  function onReady(){
+    try{ const s = localStorage.getItem(STORAGE_IMG); state.images = s? JSON.parse(s): SEED_IMAGES.slice(); }catch{ state.images = SEED_IMAGES.slice(); }
+    try{ const r = localStorage.getItem(STORAGE_REELS); state.reels = r? JSON.parse(r): SEED_REELS.slice(); }catch{ state.reels = SEED_REELS.slice(); }
+    ensureBaseline();
+    els.year.textContent = new Date().getFullYear();
+
+    buildPills();
+    els.newCat.innerHTML = CONTENT_CATS.filter(c=>c!=='Reels').map(c=>`<option value="${c}">${c}</option>`).join('');
+
+    els.catRow.addEventListener('click',(e)=>{ const b=e.target.closest('button'); if(!b) return; state.category=b.dataset.cat; buildPills(); render(); });
+    els.search.addEventListener('input',()=>{ state.query = els.search.value.toLowerCase(); render(); });
+
+    // overlays
+    els.lbLeft.onclick = ()=> navImage(-1);
+    els.lbRight.onclick = ()=> navImage(1);
+    els.lbClose.onclick = closeLightbox;
+    els.vbLeft.onclick = ()=> navVideo(-1);
+    els.vbRight.onclick = ()=> navVideo(1);
+    els.vbClose.onclick = closeVideo;
+    window.addEventListener('keydown',(e)=>{
+      if(els.lightbox.style.display==='flex'){
+        if(e.key==='ArrowLeft') navImage(-1);
+        if(e.key==='ArrowRight') navImage(1);
+        if(e.key==='Escape') closeLightbox();
+      } else if(els.videoBox.style.display==='flex'){
+        if(e.key==='ArrowLeft') navVideo(-1);
+        if(e.key==='ArrowRight') navVideo(1);
+        if(e.key==='Escape') closeVideo();
+      }
+    });
+
+    // design button toggles (single button)
+    updateDesignUI();
+    els.designBtn.onclick = ()=>{
+      if(!state.designUnlocked){
+        const p = prompt('Enter design password');
+        if(p!==null && (p+'').trim()===DESIGN_PASSWORD){ state.designUnlocked = true; }
+        else return alert('Incorrect password');
+      } else {
+        state.designUnlocked = false; els.settings.style.display='none';
+      }
+      updateDesignUI();
+    };
+
+    // settings modal
+    els.doneBtn.onclick = ()=> els.settings.style.display='none';
+    els.tabImages.onclick = ()=>{ els.tabImages.classList.add('active'); els.tabReels.classList.remove('active'); els.panelImages.style.display='block'; els.panelReels.style.display='none'; };
+    els.tabReels.onclick = ()=>{ els.tabReels.classList.add('active'); els.tabImages.classList.remove('active'); els.panelImages.style.display='none'; els.panelReels.style.display='block'; };
+
+    // adders
+    els.addURL.onclick = ()=>{ const url = (els.newURL.value||'').trim(); if(!url) return; const title = (els.newTitle.value||'Untitled').trim(); const cat = els.newCat.value || '2D Animation'; const item = {id:'id-'+Date.now()+Math.random().toString(36).slice(2,6),type:'image',src:url,title,category:cat}; state.images = [item, ...state.images]; save(); clearImageForm(); render(); };
+    els.fileInput.onchange = async (e)=>{ const files = Array.from(e.target.files||[]); for(const f of files){ const dataUrl = await fileToDataURL(f); const title=(els.newTitle.value||f.name); const cat=els.newCat.value||'2D Animation'; state.images.unshift({id:'id-'+Date.now()+Math.random().toString(36).slice(2,6),type:'image',src:dataUrl,title,category:cat}); } save(); clearImageForm(); render(); e.target.value=''; };
+    els.addReel.onclick = ()=>{ const title = (els.reelTitle.value||'Untitled Reel').trim(); const url = (els.reelURL.value||'').trim(); if(!url) return alert('Paste a YouTube or Vimeo URL'); const thumb = (els.reelThumb.value||'').trim(); const v = vid(title,url,thumb); if(v.platform==='unknown'||!v.vid) return alert('That link does not look like YouTube or Vimeo.'); state.reels = [v, ...state.reels]; save(); clearReelForm(); render(); };
+
+    // quick bar launchers
+    els.quickAddImage.onclick = ()=>{ if(!state.designUnlocked) return; openSettings('image'); };
+    els.quickAddReel.onclick = ()=>{ if(!state.designUnlocked) return; openSettings('reel'); };
+
+    // delegated clicks
+    document.addEventListener('click',(e)=>{
+      const imgBtn = e.target.closest('[data-open-img]');
+      if(imgBtn){ imgIndex = Number(imgBtn.getAttribute('data-open-img')); openLightbox(imgIndex); return; }
+      const reelBtn = e.target.closest('[data-open-reel]');
+      if(reelBtn){ vidIndex = Number(reelBtn.getAttribute('data-open-reel')); openVideo(vidIndex); return; }
+      if(state.designUnlocked){
+        const del = e.target.closest('[data-del]'); if(del){ e.stopPropagation(); const id=del.getAttribute('data-del'); state.images = state.images.filter(x=>x.id!==id); save(); render(); return; }
+        const rdel = e.target.closest('[data-rdel]'); if(rdel){ e.stopPropagation(); const id=rdel.getAttribute('data-rdel'); state.reels = state.reels.filter(x=>x.id!==id); save(); render(); return; }
+      }
+    });
+
+    // contact modal
+    els.contactBtn.onclick = ()=>{ els.contactBox.style.display='flex'; };
+    els.contactClose.onclick = ()=>{ els.contactBox.style.display='none'; };
+    els.copyEmail.onclick = async ()=>{ try{ await navigator.clipboard.writeText('ramonbmedenillajr@gmail.com'); alert('Email copied'); }catch{ alert('Copy failed'); } };
+    els.copyPhone.onclick = async ()=>{ try{ await navigator.clipboard.writeText('(562) 204-4726'); alert('Phone copied'); }catch{ alert('Copy failed'); } };
+
+    render();
+  }
+
+  function updateDesignUI(){
+    els.designBtn.textContent = state.designUnlocked ? 'Exit Design' : 'Design';
+    els.quickBar.style.display = state.designUnlocked ? 'flex' : 'none';
+    if(state.designUnlocked) openSettings(); else els.settings.style.display='none';
+  }
+
+  function openSettings(pref){ if(!state.designUnlocked) return; els.settings.style.display='block'; const defCat = state.category==='All'||state.category==='Reels' ? '2D Animation' : state.category; els.newCat.value = defCat; if(pref==='reel') els.tabReels.click(); else els.tabImages.click(); }
+
+  function fileToDataURL(file){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(String(r.result)); r.onerror=rej; r.readAsDataURL(file); }); }
+  function save(){ try{ localStorage.setItem(STORAGE_IMG, JSON.stringify(state.images)); localStorage.setItem(STORAGE_REELS, JSON.stringify(state.reels)); }catch{} }
+  function clearImageForm(){ els.newTitle.value=''; els.newURL.value=''; els.newCat.value='2D Animation'; }
+  function clearReelForm(){ els.reelTitle.value=''; els.reelURL.value=''; els.reelThumb.value=''; }
+
+  // helpers
+  function imagesByCategory(cat){ return state.images.filter(it=> it.category===cat); }
+  function reelsByCategory(){ return state.reels.slice(); }
+  function filterApply(list){ const q = state.query; if(!q) return list.slice(); return list.filter(it=> (it.title||'').toLowerCase().includes(q)); }
+
+  function buildPills(){ els.catRow.innerHTML = CATEGORIES.map(c=>`<button class=\"pill ${c===state.category?'active':''}\" data-cat=\"${c}\">${c}</button>`).join(''); els.qCat1.textContent = state.category; }
+
+  function render(){
+    if(state.category==='All'){
+      els.rows.style.display='block'; els.grid.style.display='none'; renderRows();
+    } else {
+      els.rows.style.display='none'; els.grid.style.display='grid'; renderGrid(state.category);
+    }
+    els.year.textContent = new Date().getFullYear();
+  }
+
+  function renderRows(){
+    const cats = ['Reels','2D Animation','Character Design','Storyboards','Concept Art','Illustration'];
+    els.rows.innerHTML = cats.map(cat=>renderRow(cat)).filter(Boolean).join('') || `<div class=\"muted\" style=\"margin:20px 6px\">No items yet. Unlock Design to add.</div>`;
+  }
+
+  function renderRow(cat){
+    let list = cat==='Reels' ? reelsByCategory() : imagesByCategory(cat);
+    list = filterApply(list);
+    if(!list.length) return '';
+    if(cat==='Reels'){ vidList = list; } else { imgList = list; }
+    let index = 0;
+    const tiles = list.map(it=>{
+      const delBtn = state.designUnlocked ? (it.type==='reel' ? `<button class=\"trash\" data-rdel=\"${it.id}\">Delete</button>` : `<button class=\"trash\" data-del=\"${it.id}\">Delete</button>`) : '';
+      if(it.type==='reel'){
+        return `<div class=\"tile\"><button data-open-reel=\"${index++}\" style=\"all:unset;cursor:pointer;display:block;width:100%\"><img src=\"${it.thumb}\" alt=\"${escapeHtml(it.title)}\" /><div class=\"cap\"><div style=\"font-weight:700;font-size:13px\">${escapeHtml(it.title)}</div><div class=\"muted\">Reel</div></div></button>${delBtn}</div>`;
+      } else {
+        return `<div class=\"tile\"><button data-open-img=\"${index++}\" style=\"all:unset;cursor:pointer;display:block;width:100%\"><img src=\"${it.src}\" alt=\"${escapeHtml(it.title||'')}\" /><div class=\"cap\"><div style=\"font-weight:700;font-size:13px\">${escapeHtml(it.title||'')}</div><div class=\"muted\">${escapeHtml(cat)}</div></div></button>${delBtn}</div>`;
+      }
+    }).join('');
+    return `<div class=\"rowwrap\"><div class=\"section-title\">${cat}</div><div class=\"hscroll\">${tiles}</div></div>`;
+  }
+
+  function renderGrid(cat){
+    let list = cat==='Reels' ? reelsByCategory() : imagesByCategory(cat);
+    list = filterApply(list);
+    if(cat==='Reels'){ vidList = list; imgList = []; }
+    else { imgList = list; vidList = []; }
+    let index = 0;
+    els.grid.innerHTML = list.map(it=>{
+      const delBtn = state.designUnlocked ? (it.type==='reel' ? `<button class=\"trash\" data-rdel=\"${it.id}\">Delete</button>` : `<button class=\"trash\" data-del=\"${it.id}\">Delete</button>`) : '';
+      if(it.type==='reel'){
+        return `<div class=\"tile\"><button data-open-reel=\"${index++}\" style=\"all:unset;cursor:pointer;display:block;width:100%\"><img src=\"${it.thumb}\" alt=\"${escapeHtml(it.title)}\" /><div class=\"cap\"><div style=\"font-weight:700;font-size:13px\">${escapeHtml(it.title)}</div><div class=\"muted\">Reel</div></div></button>${delBtn}</div>`;
+      } else {
+        return `<div class=\"tile\"><button data-open-img=\"${index++}\" style=\"all:unset;cursor:pointer;display:block;width:100%\"><img src=\"${it.src}\" alt=\"${escapeHtml(it.title||'')}\" /><div class=\"cap\"><div style=\"font-weight:700;font-size:13px\">${escapeHtml(it.title||'')}</div><div class=\"muted\">${escapeHtml(cat)}</div></div></button>${delBtn}</div>`;
+      }
+    }).join('');
+  }
+
+  // overlays
+  function openLightbox(idx){ const it = imgList[idx]; if(!it) return; els.lbImg.src = it.src; els.lbMeta.textContent = `${it.title||''}`; els.lightbox.style.display='flex'; }
+  function closeLightbox(){ els.lightbox.style.display='none'; }
+  function navImage(dir){ if(!imgList.length) return; imgIndex = (imgIndex + dir + imgList.length) % imgList.length; const it = imgList[imgIndex]; els.lbImg.src = it.src; els.lbMeta.textContent = `${it.title||''}`; }
+
+  function openVideo(i){ const r = vidList[i]; if(!r) return; els.vbFrame.src = embedURL(r.platform,r.vid); els.vbMeta.textContent = `${r.title}`; els.videoBox.style.display='flex'; }
+  function closeVideo(){ els.videoBox.style.display='none'; els.vbFrame.src = ''; }
+  function navVideo(dir){ if(!vidList.length) return; vidIndex = (vidIndex + dir + vidList.length) % vidList.length; const r = vidList[vidIndex]; els.vbFrame.src = embedURL(r.platform,r.vid); els.vbMeta.textContent = `${r.title}`; }
+
+  function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;').replace(/'/g,'&#39;'); }
+
+  // boot
+  function ready(fn){ document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn); }
+  ready(onReady);
+  </script>
+
+
+</body></html>
