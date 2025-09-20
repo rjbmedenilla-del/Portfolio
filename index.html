@@ -253,8 +253,8 @@
   const STORAGE_IMG = 'rj_images';
   const STORAGE_REELS = 'rj_reels';
   const DESIGN_PASSWORD = 'Rjrj';
-  const CATEGORIES = ['All','Reels','2D Animation','Character Design','Storyboards','Concept Art','Illustration'];
-  const CONTENT_CATS = ['Reels','2D Animation','Character Design','Storyboards','Concept Art','Illustration'];
+  const CATEGORIES = ['All','Reels','3D Models','Character Design','Renders','Concept Art'];
+  const CONTENT_CATS = ['Reels','3D Models','Character Design','Renders','Concept Art'];
 
   // --- Seed content (multiple per category)
   const SEED_IMAGES = [
@@ -262,21 +262,18 @@
     {id:'cd-1',type:'image',src:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop',title:'Character Turnaround — The Runner',category:'Character Design'},
     {id:'cd-2',type:'image',src:'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?q=80&w=1200&auto=format&fit=crop',title:'Gesture Sheet — Acrobat',category:'Character Design'},
     {id:'cd-3',type:'image',src:'https://images.unsplash.com/photo-1520975922284-c0d61ecf5182?q=80&w=1200&auto=format&fit=crop',title:'Expression Set — Hero',category:'Character Design'},
-    // Storyboards
-    {id:'sb-1',type:'image',src:'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1200&auto=format&fit=crop',title:'Storyboard: Alley Chase (Panel 03)',category:'Storyboards'},
-    {id:'sb-2',type:'image',src:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop',title:'Storyboard: Café Beat (Panel 07)',category:'Storyboards'},
-    {id:'sb-3',type:'image',src:'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?q=80&w=1200&auto=format&fit=crop',title:'Storyboard: Exit Ramp (Panel 12)',category:'Storyboards'},
-    // 2D Animation frames
-    {id:'an-1',type:'image',src:'https://images.unsplash.com/photo-1517816428104-797678c7cf0d?q=80&w=1200&auto=format&fit=crop',title:'2D Animation Frame — Splash FX',category:'2D Animation'},
-    {id:'an-2',type:'image',src:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop',title:'Timing Keys — Jump',category:'2D Animation'},
-    {id:'an-3',type:'image',src:'https://images.unsplash.com/photo-1495567720989-cebdbdd97913?q=80&w=1200&auto=format&fit=crop',title:'Breakdown — Run Cycle',category:'2D Animation'},
+    // Renders
+    {id:'sb-1',type:'image',src:'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1200&auto=format&fit=crop',title:'Storyboard: Alley Chase (Panel 03)',category:'Renders'},
+    {id:'sb-2',type:'image',src:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop',title:'Storyboard: Café Beat (Panel 07)',category:'Renders'},
+    {id:'sb-3',type:'image',src:'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?q=80&w=1200&auto=format&fit=crop',title:'Storyboard: Exit Ramp (Panel 12)',category:'Renders'},
+    // 3D Models
+    {id:'an-1',type:'image',src:'https://images.unsplash.com/photo-1517816428104-797678c7cf0d?q=80&w=1200&auto=format&fit=crop',title:'2D Animation Frame — Splash FX',category:'3D Models'},
+    {id:'an-2',type:'image',src:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop',title:'Timing Keys — Jump',category:'3D Models'},
+    {id:'an-3',type:'image',src:'https://images.unsplash.com/photo-1495567720989-cebdbdd97913?q=80&w=1200&auto=format&fit=crop',title:'Breakdown — Run Cycle',category:'3D Models'},
     // Concept Art
     {id:'ca-1',type:'image',src:'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?q=80&w=1200&auto=format&fit=crop',title:'Concept Art — Dawn City',category:'Concept Art'},
     {id:'ca-2',type:'image',src:'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop',title:'Concept Art — Canyon Vista',category:'Concept Art'},
     {id:'ca-3',type:'image',src:'https://images.unsplash.com/photo-1500534314210-9ead85f4d4e9?q=80&w=1200&auto=format&fit=crop',title:'Concept Art — Night Harbor',category:'Concept Art'},
-    // Illustration
-    {id:'il-1',type:'image',src:'https://images.unsplash.com/photo-1519689099080-2fce0f0a3f3b?q=80&w=1200&auto=format&fit=crop',title:'Illustration — Moonlight',category:'Illustration'},
-    {id:'il-2',type:'image',src:'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop',title:'Illustration — Alley Poster',category:'Illustration'}
   ];
 
   function parseVideo(url){
@@ -293,8 +290,8 @@
 
   const SEED_REELS = [
     vid('RM Studio','https://youtu.be/d73W6Xt9h4Q?si=D2GratJNlsyQt5_9'),
-    vid('Animation Reel 2','https://www.youtube.com/watch?v=vLtSBmAyRWY'),
-    vid('Animation Reel 3','https://www.youtube.com/watch?v=AQgMrIf0lMk')
+    vid('The Most Valuable Treasure','https://youtu.be/1aBwsELdJiw'),
+    vid('The Amateur Spy','https://youtu.be/W0RRounpRAs')
   ];
 
   // --- Elements
